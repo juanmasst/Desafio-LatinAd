@@ -1,9 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>My Electron App</title>
-  </head>
-  <body>
-    <h1>Hello, Electron!</h1>
-  </body>
+<head>
+  <title>My Electron App</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <div class="title-bar">
+    <button onclick="toggleFullScreen()">Toggle Full Screen</button>
+    <button onclick="closeWindow()">Close</button>
+  </div>
+  <h1>Hello, Electron!</h1>
+  <script>
+    const { remote } = require('electron');
+    const win = remote.getCurrentWindow();
+
+    function toggleFullScreen() {
+      win.setFullScreen(!win.isFullScreen());
+    }
+
+    function closeWindow() {
+      win.close();
+    }
+  </script>
+</body>
 </html>

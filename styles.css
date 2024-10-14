@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.title-bar {
+  -webkit-app-region: drag;
+  height: 30px;
+  background: #333;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.title-bar button {
+  -webkit-app-region: no-drag;
+  background: none;
+  border: none;
+  color: white;
+  padding: 0 10px;
+  cursor: pointer;
+}
