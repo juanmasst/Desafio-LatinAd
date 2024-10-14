@@ -1,28 +1,32 @@
 const { app, BrowserWindow, globalShortcut } = require("electron");
 
+try {
+	require('electron-reloader')(module);
+} catch {}
+
 function createWindow () {
   const win = new BrowserWindow({
     width: 800, 
     height: 600, 
     x: 100, 
     y: 100, 
-    frame: false, // borderless
-    titleBarStyle: 'hiddenInset', // hide title bar
+    frame: false, // Sin marcos
+    titleBarStyle: 'hiddenInset', // Ocultar la barra de título pero mantener los botones en macOS
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false // allow require in renderer
+      contextIsolation: false // Permitir el uso de Node.js en el contexto de la página web
     }
   });
 
-  win.setMenu(null); // hide menu bar
+  win.setMenu(null); // Ocultar el menú
   win.loadFile("index.html");
 
-  // hide cursor when window is loaded
+  // Ocultar el cursor del mouse cuando esté sobre la ventana
   win.webContents.on('did-finish-load', () => {
     win.webContents.insertCSS('body { cursor: none; }');
   });
 
-  // full screen with F11 key
+  // Registrar un atajo de teclado para alternar entre pantalla completa y modo ventana
   globalShortcut.register('F11', () => {
     win.setFullScreen(!win.isFullScreen());
   });
@@ -31,7 +35,7 @@ function createWindow () {
 app.whenReady().then(() => {
   createWindow();
 
-  // global shortcut for full screen
+  // Registrar atajos de teclado globales
   globalShortcut.register('F11', () => {
     const win = BrowserWindow.getFocusedWindow();
     if (win) {
